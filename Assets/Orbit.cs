@@ -7,6 +7,8 @@ public class Orbit : MonoBehaviour
     [SerializeField]
     public GameObject centerObject;
     [SerializeField]
+    public bool isRotate = false;
+    [SerializeField]
     float xTarget = 0f, yTarget = 0f, zTarget = 0f;
     public float speed = 3;
     private Vector3 rotation;
@@ -25,5 +27,9 @@ public class Orbit : MonoBehaviour
         Vector3 posToMidLine = Vector3.Normalize(gameObject.transform.position - centerObject.transform.position);
         Vector3.OrthoNormalize(ref posToMidLine, ref rotation);
         orbiter.velocity = rotation * speed;
+        if(isRotate)
+        {
+            gameObject.transform.LookAt(gameObject.transform.position + orbiter.velocity, posToMidLine); // bottom will face towards the center point
+        }
     }
 }
