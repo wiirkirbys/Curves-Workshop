@@ -12,6 +12,7 @@ public class Orbit : MonoBehaviour
     float xTarget = 0f, yTarget = 0f, zTarget = 0f;
     public float speed = 3;
     private Vector3 rotation;
+    private float distance;
    
     private Rigidbody orbiter;
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class Orbit : MonoBehaviour
     {
         orbiter = gameObject.GetComponent<Rigidbody>();
         rotation = new Vector3(xTarget, yTarget, zTarget); //will rotate towards the stated vector relative to center
+        distance = Vector3.Distance(gameObject.transform.position, centerObject.transform.position);
     }
 
     // Update is called once per frame
@@ -31,5 +33,10 @@ public class Orbit : MonoBehaviour
         {
             gameObject.transform.LookAt(gameObject.transform.position + orbiter.velocity, posToMidLine); // bottom will face towards the center point
         }
+        if (Vector3.Distance(gameObject.transform.position, centerObject.transform.position) > distance)
+        {
+            gameObject.transform.position += (Vector3.Distance(gameObject.transform.position, centerObject.transform.position) - distance) * -Vector3.Normalize(gameObject.transform.position - centerObject.transform.position);
+        }
     }
+
 }

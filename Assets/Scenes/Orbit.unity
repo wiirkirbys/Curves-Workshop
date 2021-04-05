@@ -685,7 +685,7 @@ MonoBehaviour:
   xTarget: 0
   yTarget: 0.5
   zTarget: -1
-  speed: 5
+  speed: 20
 --- !u!54 &1939227400
 Rigidbody:
   m_ObjectHideFlags: 0
